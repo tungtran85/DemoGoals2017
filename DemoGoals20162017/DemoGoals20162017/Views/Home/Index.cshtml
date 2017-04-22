@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
@@ -29,3 +29,37 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<script>
+    var lstObj = [
+        { Id: 1, Name: 'Tung', Hobboy: ['sing', 'sleep', 'travel'] },
+        { Id: 2, Name: 'Tri', Hobboy: ['eat', 'drink', 'swim'] },
+        { Id: 3, Name: 'Son', Hobboy: ['music', 'sing', 'learn'] }
+    ];
+
+    $(function ()
+    {
+        $.ajax({
+            contentType: 'application/json',
+            datatype: 'json',
+            type: 'POST',
+            url: '@Url.Action("DemoPostListObject", "Home")',
+            cache: false,
+            data:  JSON.stringify({ 'lst': lstObj }),
+            traditional: true,
+
+            success: function (response) {
+                if (response.success) {
+                    alert("Success ^_^");
+                } else {
+                    alert("Fail :( ");
+                }
+            },
+            error: function (data) {
+
+            }
+        });
+
+    });
+
+</script>

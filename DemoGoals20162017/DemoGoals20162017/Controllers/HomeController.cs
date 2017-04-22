@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using DemoGoals20162017.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,20 @@ namespace DemoGoals20162017.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult DemoPostListObject(List<ObjectCustom> lst)
+        {
+            if (lst != null
+                && lst.Count > 0
+                && lst[0].Id > 0
+                && !string.IsNullOrEmpty(lst[0].Name)
+                && lst[0].Hobboy.Count > 0)
+            {
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
         }
     }
 }
